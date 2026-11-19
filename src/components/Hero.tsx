@@ -7,7 +7,7 @@ import { soundFx } from "@/lib/soundFx";
 export default function Hero() {
   const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
   const [activeChip, setActiveChip] = useState<number | null>(null);
-  const [activeTab, setActiveTab] = useState<"design" | "prototype" | "tokens">("design");
+  const [activeTab, setActiveTab] = useState<"design" | "tokens">("design");
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Smooth mouse-follow parallax calculation
@@ -173,8 +173,192 @@ export default function Hero() {
               ))}
             </div>
 
-            {/* CTAs with Kasavu Gold & Dark Obsidian Styling */}
-            <div className="flex flex-wrap items-center gap-3.5 pt-2">
+            {/* UX Journal Exploration Link in Left Column */}
+            <div className="pt-1">
+              <a
+                href="/ux-journal"
+                onClick={() => soundFx.playClick()}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#11151D]/80 hover:bg-[#161C26] border border-white/10 hover:border-emerald-500/40 text-zinc-400 hover:text-emerald-300 text-xs font-mono transition-all cursor-pointer"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Explore UX Journal &amp; Heuristics Playbook →</span>
+              </a>
+            </div>
+
+          </div>
+
+          {/* =========================================================================
+              RIGHT COLUMN: 3D Interactive Canvas + Action CTAs Placed Beneath It
+             ========================================================================= */}
+          <div className="lg:col-span-6 xl:col-span-5 relative flex flex-col items-center justify-center space-y-6">
+
+            {/* 3D Canvas Box Container */}
+            <div className="relative w-full flex items-center justify-center">
+
+              {/* Ambient Golden & Emerald Backlight Glow */}
+              <div className="absolute -inset-4 sm:-inset-6 rounded-3xl bg-gradient-to-tr from-amber-500/25 via-emerald-500/20 to-amber-600/30 blur-2xl pointer-events-none animate-lantern-glow" />
+
+              {/* 3D Tilt Artwork Canvas Container */}
+              <div
+                className="relative w-full max-w-[500px] rounded-3xl overflow-hidden border-2 border-amber-500/40 bg-[#0B0F17] shadow-2xl shadow-black/90 group transition-transform duration-200 ease-out"
+                style={{
+                  transform: `perspective(1200px) rotateX(${mouseOffset.y * -14}deg) rotateY(${mouseOffset.x * 14}deg) scale3d(1.02, 1.02, 1.02)`,
+                }}
+              >
+                {/* Figma-Style Canvas Header Bar */}
+                <div className="px-4 py-2.5 bg-[#0D121B] border-b border-amber-500/20 flex items-center justify-between text-xs">
+                  <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-[#E0443E]/50 inline-block" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] border border-[#DEA123]/50 inline-block" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] border border-[#1AAB29]/50 inline-block" />
+                    </div>
+                    <span className="text-[11px] font-mono text-zinc-400 ml-2 hidden sm:inline">
+                      kerala-travel-os.fig
+                    </span>
+                  </div>
+
+                  {/* Canvas Mode Tabs */}
+                  <div className="flex items-center gap-1 bg-[#131926] p-0.5 rounded-lg border border-white/5 text-[10px] font-mono">
+                    <button
+                      onClick={() => {
+                        soundFx.playPop();
+                        setActiveTab("design");
+                      }}
+                      className={`px-2 py-0.5 rounded transition-colors ${
+                        activeTab === "design"
+                          ? "bg-amber-500/20 text-amber-300 font-bold"
+                          : "text-zinc-400 hover:text-white"
+                      }`}
+                    >
+                      Design
+                    </button>
+                    <button
+                      onClick={() => {
+                        soundFx.playPop();
+                        setActiveTab("tokens");
+                      }}
+                      className={`px-2 py-0.5 rounded transition-colors ${
+                        activeTab === "tokens"
+                          ? "bg-amber-500/20 text-amber-300 font-bold"
+                          : "text-zinc-400 hover:text-white"
+                      }`}
+                    >
+                      Tokens
+                    </button>
+                  </div>
+
+                  {/* Status indicator */}
+                  <div className="flex items-center gap-1 text-[10px] text-emerald-400 font-mono">
+                    <CheckCircle2 className="w-3 h-3" />
+                    <span className="hidden sm:inline">Auto Layout</span>
+                  </div>
+                </div>
+
+                {/* Main Artwork Stage */}
+                <div className="relative aspect-[16/11] sm:aspect-[16/10] overflow-hidden bg-[#07090E]">
+                  {/* Dark Theme Hero Artwork */}
+                  <img
+                    src="/assets/hero_uiux_kerala_dark.jpg"
+                    alt="Dark Theme UI/UX Design Ecosystem with Kerala Vibe: Glassmorphic Dashboard, Mobile App, Wireframe Blueprints, and Design System"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+
+                  {/* Dynamic Mouse Shimmer Sheen */}
+                  <div
+                    className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-amber-300/10 pointer-events-none transition-opacity duration-300"
+                    style={{
+                      opacity: Math.abs(mouseOffset.x) + 0.1,
+                    }}
+                  />
+
+                  {/* Dark Ambient Edge Vignette */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080A0D] via-transparent to-black/30 pointer-events-none" />
+
+                  {/* Floating Interactive Tokens Drawer */}
+                  {activeTab === "tokens" && (
+                    <div className="absolute inset-x-3 bottom-3 p-3 rounded-2xl bg-[#0C1018]/95 backdrop-blur-xl border border-amber-500/40 shadow-2xl z-20 animate-fadeIn">
+                      <div className="flex items-center justify-between pb-2 border-b border-white/10 mb-2">
+                        <span className="text-[10px] uppercase font-bold tracking-wider text-amber-400 flex items-center gap-1.5">
+                          <Sliders className="w-3 h-3" /> Design Tokens • Color &amp; Scales
+                        </span>
+                        <span className="text-[9px] font-mono text-zinc-400">WCAG AAA</span>
+                      </div>
+
+                      <div className="grid grid-cols-4 gap-2">
+                        {colorTokens.map((token, tIdx) => (
+                          <div key={tIdx} className="text-left">
+                            <div className={`w-full h-5 rounded-md ${token.bg} mb-1 shadow-inner`} />
+                            <div className="text-[9px] font-bold text-white truncate leading-tight">
+                              {token.name}
+                            </div>
+                            <div className="text-[8px] font-mono text-zinc-400">
+                              {token.hex}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Bottom Canvas Footer Strip */}
+                <div className="p-3.5 bg-[#0D121B] border-t border-amber-500/20 flex items-center justify-between z-10">
+                  <div className="text-left">
+                    <div className="text-[10px] uppercase font-bold tracking-wider text-amber-400 flex items-center gap-1.5">
+                      <span>🪔</span> UI/UX CRAFT • KERALA SOUL
+                    </div>
+                    <div className="text-xs font-semibold text-white mt-0.5">
+                      Glassmorphic Systems • 8pt Rhythm • Wireframes
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[9px] font-mono text-emerald-300 font-bold">
+                      3D PARALLAX
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating Interactive Micro-Interactions Chips (Parallax 3D Depth Layers) */}
+              {chips.map((chip, idx) => (
+                <div
+                  key={idx}
+                  onMouseEnter={() => {
+                    soundFx.playPop();
+                    setActiveChip(idx);
+                  }}
+                  onMouseLeave={() => setActiveChip(null)}
+                  className={`absolute z-30 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0E131C]/95 backdrop-blur-md border border-amber-500/40 shadow-xl transition-all duration-300 cursor-pointer ${
+                    chip.pos
+                  } ${
+                    activeChip === idx
+                      ? "scale-110 border-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.5)] bg-[#141A26]"
+                      : "opacity-90 hover:opacity-100"
+                  }`}
+                  style={{
+                    transform: `translate(${mouseOffset.x * chip.x}px, ${mouseOffset.y * chip.y}px)`,
+                  }}
+                >
+                  <span className="text-sm">{chip.icon}</span>
+                  <div className="text-left">
+                    <div className="text-[10px] font-bold text-white leading-tight">
+                      {chip.label}
+                    </div>
+                    <div className="text-[8px] font-medium text-amber-300 leading-tight">
+                      {chip.sub}
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+            </div>
+
+            {/* =========================================================================
+                CTAs PLACED DIRECTLY BENEATH THE IMAGE CONTENT ON RIGHT HAND SIDE
+               ========================================================================= */}
+            <div className="flex flex-wrap items-center justify-center gap-3.5 pt-1 w-full z-20">
               <a
                 href="#contact"
                 onClick={() => soundFx.playChime()}
@@ -194,176 +378,7 @@ export default function Hero() {
                 </div>
                 <span>Explore Works</span>
               </a>
-
-              <a
-                href="/ux-journal"
-                onClick={() => soundFx.playClick()}
-                className="px-4 py-3.5 rounded-full bg-[#11151D]/80 hover:bg-[#161C26] border border-white/10 hover:border-emerald-500/40 text-zinc-300 hover:text-emerald-300 text-xs font-mono transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-                <span>UX Journal</span>
-              </a>
             </div>
-
-          </div>
-
-          {/* =========================================================================
-              RIGHT COLUMN: 3D Interactive UI/UX Design Ecosystem Canvas (5.5 cols)
-             ========================================================================= */}
-          <div className="lg:col-span-6 xl:col-span-5 relative flex items-center justify-center">
-
-            {/* Ambient Golden & Emerald Backlight Glow */}
-            <div className="absolute -inset-4 sm:-inset-6 rounded-3xl bg-gradient-to-tr from-amber-500/25 via-emerald-500/20 to-amber-600/30 blur-2xl pointer-events-none animate-lantern-glow" />
-
-            {/* 3D Tilt Artwork Canvas Container */}
-            <div
-              className="relative w-full max-w-[500px] rounded-3xl overflow-hidden border-2 border-amber-500/40 bg-[#0B0F17] shadow-2xl shadow-black/90 group transition-transform duration-200 ease-out"
-              style={{
-                transform: `perspective(1200px) rotateX(${mouseOffset.y * -14}deg) rotateY(${mouseOffset.x * 14}deg) scale3d(1.02, 1.02, 1.02)`,
-              }}
-            >
-              {/* Figma-Style Canvas Header Bar */}
-              <div className="px-4 py-2.5 bg-[#0D121B] border-b border-amber-500/20 flex items-center justify-between text-xs">
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-[#E0443E]/50 inline-block" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] border border-[#DEA123]/50 inline-block" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] border border-[#1AAB29]/50 inline-block" />
-                  </div>
-                  <span className="text-[11px] font-mono text-zinc-400 ml-2 hidden sm:inline">
-                    kerala-travel-os.fig
-                  </span>
-                </div>
-
-                {/* Canvas Mode Tabs */}
-                <div className="flex items-center gap-1 bg-[#131926] p-0.5 rounded-lg border border-white/5 text-[10px] font-mono">
-                  <button
-                    onClick={() => {
-                      soundFx.playPop();
-                      setActiveTab("design");
-                    }}
-                    className={`px-2 py-0.5 rounded transition-colors ${activeTab === "design"
-                        ? "bg-amber-500/20 text-amber-300 font-bold"
-                        : "text-zinc-400 hover:text-white"
-                      }`}
-                  >
-                    Design
-                  </button>
-                  <button
-                    onClick={() => {
-                      soundFx.playPop();
-                      setActiveTab("tokens");
-                    }}
-                    className={`px-2 py-0.5 rounded transition-colors ${activeTab === "tokens"
-                        ? "bg-amber-500/20 text-amber-300 font-bold"
-                        : "text-zinc-400 hover:text-white"
-                      }`}
-                  >
-                    Tokens
-                  </button>
-                </div>
-
-                {/* Status indicator */}
-                <div className="flex items-center gap-1 text-[10px] text-emerald-400 font-mono">
-                  <CheckCircle2 className="w-3 h-3" />
-                  <span className="hidden sm:inline">Auto Layout</span>
-                </div>
-              </div>
-
-              {/* Main Artwork Stage */}
-              <div className="relative aspect-[16/11] sm:aspect-[16/10] overflow-hidden bg-[#07090E]">
-                {/* Dark Theme Hero Artwork */}
-                <img
-                  src="/assets/hero_uiux_kerala_dark.jpg"
-                  alt="Dark Theme UI/UX Design Ecosystem with Kerala Vibe: Glassmorphic Dashboard, Mobile App, Wireframe Blueprints, and Design System"
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-
-                {/* Dynamic Mouse Shimmer Sheen */}
-                <div
-                  className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-amber-300/10 pointer-events-none transition-opacity duration-300"
-                  style={{
-                    opacity: Math.abs(mouseOffset.x) + 0.1,
-                  }}
-                />
-
-                {/* Dark Ambient Edge Vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#080A0D] via-transparent to-black/30 pointer-events-none" />
-
-                {/* Floating Interactive Tokens Drawer (When "Tokens" tab active or hovered) */}
-                {activeTab === "tokens" && (
-                  <div className="absolute inset-x-3 bottom-3 p-3 rounded-2xl bg-[#0C1018]/95 backdrop-blur-xl border border-amber-500/40 shadow-2xl z-20 animate-fadeIn">
-                    <div className="flex items-center justify-between pb-2 border-b border-white/10 mb-2">
-                      <span className="text-[10px] uppercase font-bold tracking-wider text-amber-400 flex items-center gap-1.5">
-                        <Sliders className="w-3 h-3" /> Design Tokens • Color &amp; Scales
-                      </span>
-                      <span className="text-[9px] font-mono text-zinc-400">WCAG AAA</span>
-                    </div>
-
-                    <div className="grid grid-cols-4 gap-2">
-                      {colorTokens.map((token, tIdx) => (
-                        <div key={tIdx} className="text-left">
-                          <div className={`w-full h-5 rounded-md ${token.bg} mb-1 shadow-inner`} />
-                          <div className="text-[9px] font-bold text-white truncate leading-tight">
-                            {token.name}
-                          </div>
-                          <div className="text-[8px] font-mono text-zinc-400">
-                            {token.hex}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Bottom Canvas Footer Strip */}
-              <div className="p-3.5 bg-[#0D121B] border-t border-amber-500/20 flex items-center justify-between z-10">
-                <div className="text-left">
-                  <div className="text-[10px] uppercase font-bold tracking-wider text-amber-400 flex items-center gap-1.5">
-                    <span>🪔</span> UI/UX CRAFT • KERALA SOUL
-                  </div>
-                  <div className="text-xs font-semibold text-white mt-0.5">
-                    Glassmorphic Systems • 8pt Rhythm • Wireframes
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[9px] font-mono text-emerald-300 font-bold">
-                    3D PARALLAX
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Floating Interactive Micro-Interactions Chips (Parallax 3D Depth Layers) */}
-            {chips.map((chip, idx) => (
-              <div
-                key={idx}
-                onMouseEnter={() => {
-                  soundFx.playPop();
-                  setActiveChip(idx);
-                }}
-                onMouseLeave={() => setActiveChip(null)}
-                className={`absolute z-30 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0E131C]/95 backdrop-blur-md border border-amber-500/40 shadow-xl transition-all duration-300 cursor-pointer ${chip.pos} ${activeChip === idx
-                    ? "scale-110 border-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.5)] bg-[#141A26]"
-                    : "opacity-90 hover:opacity-100"
-                  }`}
-                style={{
-                  transform: `translate(${mouseOffset.x * chip.x}px, ${mouseOffset.y * chip.y}px)`,
-                }}
-              >
-                <span className="text-sm">{chip.icon}</span>
-                <div className="text-left">
-                  <div className="text-[10px] font-bold text-white leading-tight">
-                    {chip.label}
-                  </div>
-                  <div className="text-[8px] font-medium text-amber-300 leading-tight">
-                    {chip.sub}
-                  </div>
-                </div>
-              </div>
-            ))}
 
           </div>
 

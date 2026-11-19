@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ananthakrishnan K Nair — Senior UI/UX Designer &amp; Educator</title>
+  <meta name="description" content="Senior UI/UX Designer &amp; Design System Architect based in Kerala, India. Crafting intuitive digital experiences with heritage-rooted empathy and technical precision." />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪔</text></svg>" />
+
+  <!-- Tailwind CSS via CDN with Custom Config matching React Design Tokens -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#080A0D',
+            cardDark: '#10141E',
+            kasavu: {
+              300: '#FDE68A',
+              400: '#FBBF24',
+              500: '#F59E0B',
+              600: '#D97706',
+            },
+            emeraldKerala: {
+              400: '#34D399',
+              500: '#10B981',
+              600: '#059669',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Space Grotesk', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-[#080A0D] text-[#FBF7EE] min-h-screen flex flex-col font-sans selection:bg-amber-500 selection:text-stone-950 relative overflow-x-hidden">
+
+  <!-- =========================================================================
+       1. AMBIENT BACKGROUND: Kerala Firefly Particle Canvas
+       ========================================================================= -->
+  <canvas id="particles-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
+
+  <!-- =========================================================================
+       2. STICKY HEADER & LUXURY NAVIGATION BAR
+       ========================================================================= -->
+  <header class="sticky top-0 left-0 right-0 z-40 bg-[#080A0D]/90 backdrop-blur-md border-b border-white/5 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 h-18 py-3.5 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#hero" class="flex items-center gap-3 group cursor-pointer" onclick="window.soundFx.playPop()">
+        <span class="w-9 h-9 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center font-bold text-base group-hover:scale-105 transition-transform shadow-xs">
+          🪔
+        </span>
+        <div class="text-left">
+          <div class="text-sm font-extrabold tracking-tight text-white group-hover:text-amber-300 transition-colors">
+            ANANTHAKRISHNAN
+          </div>
+          <div class="text-[10px] text-amber-400/90 font-mono tracking-wider font-semibold">
+            UI/UX DESIGNER • KERALA
+          </div>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-7 text-xs font-semibold tracking-wide text-zinc-300">
+        <a href="#hero" class="hover:text-amber-300 transition-colors" onclick="window.soundFx.playClick()">Home</a>
+        <a href="#projects" class="hover:text-amber-300 transition-colors" onclick="window.soundFx.playClick()">Projects</a>
+        <a href="ux-journal.html" class="hover:text-emerald-300 transition-colors flex items-center gap-1 text-emerald-400" onclick="window.soundFx.playClick()">
+          <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-emerald-500/15 border border-emerald-500/30">New</span>
+          UX Journal
+        </a>
+        <a href="#about" class="hover:text-amber-300 transition-colors" onclick="window.soundFx.playClick()">About</a>
+        <a href="#interactive-game" class="hover:text-amber-300 transition-colors" onclick="window.soundFx.playClick()">Fitts&apos;s Law</a>
+        <a href="#contact" class="hover:text-amber-300 transition-colors" onclick="window.soundFx.playClick()">Contact</a>
+      </nav>
+
+      <!-- Right Header Actions: Sound Toggle + View Resume -->
+      <div class="hidden sm:flex items-center gap-3">
+        <button id="sound-toggle-btn" class="p-2 rounded-full bg-[#121620] border border-white/10 hover:border-amber-500/40 transition-colors cursor-pointer" title="Toggle Sound Synthesizer" aria-label="Toggle Sound">
+          <span id="sound-icon"></span>
+        </button>
+
+        <button onclick="window.openResumeModal()" class="trigger-view-resume px-4 sm:px-5 py-2 rounded-full border border-amber-500/50 hover:border-amber-400 bg-gradient-to-r from-amber-500/10 via-amber-500/20 to-amber-500/10 hover:from-amber-500 hover:to-amber-600 hover:text-stone-950 text-amber-300 text-xs font-bold tracking-wide transition-all duration-200 flex items-center gap-1.5 shadow-sm shadow-amber-500/10 cursor-pointer group" title="View Resume">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+          <span>Resume</span>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Toggle Button -->
+      <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-xl bg-[#121620] border border-white/10 text-zinc-300 cursor-pointer" aria-label="Open mobile menu">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden px-5 py-4 bg-[#0E121B] border-b border-amber-500/20 space-y-3 text-left">
+      <a href="#hero" class="block text-sm font-semibold text-zinc-300 hover:text-amber-300">Home</a>
+      <a href="#projects" class="block text-sm font-semibold text-zinc-300 hover:text-amber-300">Projects</a>
+      <a href="ux-journal.html" class="block text-sm font-semibold text-emerald-400">UX Journal</a>
+      <a href="#about" class="block text-sm font-semibold text-zinc-300 hover:text-amber-300">About</a>
+      <a href="#interactive-game" class="block text-sm font-semibold text-zinc-300 hover:text-amber-300">Fitts&apos;s Law</a>
+      <a href="#contact" class="block text-sm font-semibold text-zinc-300 hover:text-amber-300">Contact</a>
+      <div class="pt-2 border-t border-white/10">
+        <button onclick="window.openResumeModal()" class="w-full py-2.5 rounded-xl bg-amber-500 text-stone-950 text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-md">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+          <span>View Resume</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 z-10 relative">
+
+    <!-- =========================================================================
+         3. HERO SECTION (Dark Theme UI/UX Design Ecosystem with 3D Parallax Canvas)
+         ========================================================================= -->
+    <section id="hero" class="relative min-h-[92vh] flex items-center pt-8 pb-16 sm:pt-14 sm:pb-24 overflow-hidden bg-[#080A0D]">
+      <!-- Background Kerala Backwater & Temple Lantern Glows -->
+      <div id="hero-ambient-glow" class="absolute top-12 left-1/4 w-[650px] h-[650px] rounded-full pointer-events-none blur-[140px] transition-transform duration-700 ease-out" style="background: radial-gradient(circle, rgba(212, 175, 55, 0.14) 0%, rgba(245, 158, 11, 0.04) 50%, transparent 70%);"></div>
+      <div class="absolute bottom-12 right-12 w-[550px] h-[550px] rounded-full pointer-events-none blur-[120px]" style="background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(5, 150, 105, 0.03) 50%, transparent 70%);"></div>
+
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 relative z-20 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+          <!-- Left Column: Value Proposition & Credentials -->
+          <div class="lg:col-span-6 xl:col-span-7 space-y-6 sm:space-y-7 text-left">
+            
+            <!-- Status Badge -->
+            <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-amber-500/15 via-emerald-500/10 to-transparent border border-amber-500/30 text-amber-300 text-xs font-semibold shadow-xs">
+              <span class="flex h-2 w-2 relative">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span class="tracking-wide">UI/UX Designer &amp; Design System Architect</span>
+              <span class="text-zinc-600 hidden sm:inline">•</span>
+              <span class="text-emerald-400 font-mono text-[11px] flex items-center gap-1">
+                <span>🌴</span> Kerala, India
+              </span>
+            </div>
+
+            <!-- Headline -->
+            <div class="space-y-3.5">
+              <h1 class="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold text-white tracking-tight leading-[1.1]">
+                Crafting intuitive digital experiences with{" "}
+                <span class="bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 bg-clip-text text-transparent">
+                  heritage-rooted empathy &amp; systems.
+                </span>
+              </h1>
+              <p class="text-base sm:text-lg text-zinc-300 leading-relaxed max-w-2xl font-normal">
+                Hello, I&apos;m <strong class="text-amber-300 font-semibold">Ananthakrishnan</strong> — a Senior UI/UX Designer &amp; Educator based in Kerala. With 3+ years architecting web &amp; mobile interfaces and mentoring 500+ designers, I transform complex workflows into effortless, human-centered digital products.
+              </p>
+            </div>
+
+            <!-- Designer Craft Pills -->
+            <div class="flex flex-wrap gap-2 pt-0.5">
+              <span class="px-2.5 py-1 rounded-lg bg-[#11151F]/80 border border-white/10 text-zinc-300 text-[11px] font-medium flex items-center gap-1.5">
+                <span>🎨</span> Figma Design Systems &amp; Tokens
+              </span>
+              <span class="px-2.5 py-1 rounded-lg bg-[#11151F]/80 border border-white/10 text-zinc-300 text-[11px] font-medium flex items-center gap-1.5">
+                <span>📐</span> 8pt Spatial Rhythm
+              </span>
+              <span class="px-2.5 py-1 rounded-lg bg-[#11151F]/80 border border-white/10 text-zinc-300 text-[11px] font-medium flex items-center gap-1.5">
+                <span>🧠</span> UX Research &amp; 10 Heuristics
+              </span>
+              <span class="px-2.5 py-1 rounded-lg bg-[#11151F]/80 border border-white/10 text-zinc-300 text-[11px] font-medium flex items-center gap-1.5">
+                <span>✨</span> Micro-Interactions
+              </span>
+              <span class="px-2.5 py-1 rounded-lg bg-[#11151F]/80 border border-white/10 text-zinc-300 text-[11px] font-medium flex items-center gap-1.5">
+                <span>♿</span> WCAG AAA Accessibility
+              </span>
+            </div>
+
+            <!-- Metrics Strip -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
+              <div class="p-3 rounded-2xl bg-[#10141D]/90 border border-amber-500/20 hover:border-amber-500/50 transition-colors shadow-xs group">
+                <div class="text-lg sm:text-xl font-extrabold text-amber-400 font-mono">3+ Yrs</div>
+                <div class="text-[11px] font-bold text-white leading-tight mt-0.5">Product Design</div>
+                <div class="text-[9px] text-zinc-400 leading-tight">Web &amp; Mobile Ecosystems</div>
+              </div>
+              <div class="p-3 rounded-2xl bg-[#10141D]/90 border border-amber-500/20 hover:border-amber-500/50 transition-colors shadow-xs group">
+                <div class="text-lg sm:text-xl font-extrabold text-amber-400 font-mono">500+</div>
+                <div class="text-[11px] font-bold text-white leading-tight mt-0.5">Designers Mentored</div>
+                <div class="text-[9px] text-zinc-400 leading-tight">At Zoople Technologies</div>
+              </div>
+              <div class="p-3 rounded-2xl bg-[#10141D]/90 border border-amber-500/20 hover:border-amber-500/50 transition-colors shadow-xs group">
+                <div class="text-lg sm:text-xl font-extrabold text-amber-400 font-mono">35+</div>
+                <div class="text-[11px] font-bold text-white leading-tight mt-0.5">Figma UI Systems</div>
+                <div class="text-[9px] text-zinc-400 leading-tight">Reusable Tokens &amp; Auto Layout</div>
+              </div>
+              <div class="p-3 rounded-2xl bg-[#10141D]/90 border border-amber-500/20 hover:border-amber-500/50 transition-colors shadow-xs group">
+                <div class="text-lg sm:text-xl font-extrabold text-amber-400 font-mono">MCA</div>
+                <div class="text-[11px] font-bold text-white leading-tight mt-0.5">Computer Apps</div>
+                <div class="text-[9px] text-zinc-400 leading-tight">Design-Dev Technical Literacy</div>
+              </div>
+            </div>
+
+            <!-- UX Journal Exploration Link in Left Column -->
+            <div class="pt-1">
+              <a href="ux-journal.html" onclick="window.soundFx.playClick()" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#11151F]/80 hover:bg-[#161C26] border border-white/10 hover:border-emerald-500/40 text-zinc-400 hover:text-emerald-300 text-xs font-mono transition-all cursor-pointer">
+                <span class="text-emerald-400">✨</span>
+                <span>Explore UX Journal &amp; Heuristics Playbook →</span>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Right Column: 3D Interactive Canvas + Action CTAs Placed Beneath It -->
+          <div class="lg:col-span-6 xl:col-span-5 relative flex flex-col items-center justify-center space-y-6">
+            
+            <!-- 3D Canvas Box Container -->
+            <div class="relative w-full flex items-center justify-center">
+
+              <div class="absolute -inset-4 sm:-inset-6 rounded-3xl bg-gradient-to-tr from-amber-500/25 via-emerald-500/20 to-amber-600/30 blur-2xl pointer-events-none animate-lantern-glow"></div>
+
+              <div id="hero-tilt-card" class="relative w-full max-w-[500px] rounded-3xl overflow-hidden border-2 border-amber-500/40 bg-[#0B0F17] shadow-2xl shadow-black/90 group transition-transform duration-200 ease-out" style="transform: perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);">
+              
+              <!-- Header Bar -->
+              <div class="px-4 py-2.5 bg-[#0D121B] border-b border-amber-500/20 flex items-center justify-between text-xs">
+                <div class="flex items-center gap-2">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#FF5F56] inline-block"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] inline-block"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#27C93F] inline-block"></span>
+                  </div>
+                  <span class="text-[11px] font-mono text-zinc-400 ml-2 hidden sm:inline">kerala-travel-os.fig</span>
+                </div>
+
+                <!-- Canvas Mode Tabs -->
+                <div class="flex items-center gap-1 bg-[#131926] p-0.5 rounded-lg border border-white/5 text-[10px] font-mono">
+                  <button id="hero-tab-design" class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold transition-colors">Design</button>
+                  <button id="hero-tab-tokens" class="px-2 py-0.5 rounded text-zinc-400 hover:text-white transition-colors">Tokens</button>
+                </div>
+
+                <div class="flex items-center gap-1 text-[10px] text-emerald-400 font-mono">
+                  <span>✓</span>
+                  <span class="hidden sm:inline">Auto Layout</span>
+                </div>
+              </div>
+
+              <!-- Main Artwork Stage -->
+              <div class="relative aspect-[16/11] sm:aspect-[16/10] overflow-hidden bg-[#07090E]">
+                <img src="assets/hero_uiux_kerala_dark.jpg" alt="Dark Theme UI/UX Design Ecosystem with Kerala Vibe" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#080A0D] via-transparent to-black/30 pointer-events-none"></div>
+
+                <!-- Floating Tokens Drawer -->
+                <div id="hero-tokens-drawer" class="hidden absolute inset-x-3 bottom-3 p-3 rounded-2xl bg-[#0C1018]/95 backdrop-blur-xl border border-amber-500/40 shadow-2xl z-20">
+                  <div class="flex items-center justify-between pb-2 border-b border-white/10 mb-2">
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 flex items-center gap-1.5">
+                      <span>🎨</span> Design Tokens • Color &amp; Scales
+                    </span>
+                    <span class="text-[9px] font-mono text-zinc-400">WCAG AAA</span>
+                  </div>
+                  <div class="grid grid-cols-4 gap-2 text-left">
+                    <div>
+                      <div class="w-full h-5 rounded-md bg-[#F59E0B] mb-1"></div>
+                      <div class="text-[9px] font-bold text-white truncate">Kasavu Gold</div>
+                      <div class="text-[8px] font-mono text-zinc-400">#F59E0B</div>
+                    </div>
+                    <div>
+                      <div class="w-full h-5 rounded-md bg-[#10B981] mb-1"></div>
+                      <div class="text-[9px] font-bold text-white truncate">Emerald</div>
+                      <div class="text-[8px] font-mono text-zinc-400">#10B981</div>
+                    </div>
+                    <div>
+                      <div class="w-full h-5 rounded-md bg-[#E07A5F] mb-1"></div>
+                      <div class="text-[9px] font-bold text-white truncate">Terracotta</div>
+                      <div class="text-[8px] font-mono text-zinc-400">#E07A5F</div>
+                    </div>
+                    <div>
+                      <div class="w-full h-5 rounded-md bg-slate-900 border border-white/20 mb-1"></div>
+                      <div class="text-[9px] font-bold text-white truncate">Obsidian</div>
+                      <div class="text-[8px] font-mono text-zinc-400">#0F172A</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Canvas Footer -->
+              <div class="p-3.5 bg-[#0D121B] border-t border-amber-500/20 flex items-center justify-between z-10 text-left">
+                <div>
+                  <div class="text-[10px] uppercase font-bold tracking-wider text-amber-400 flex items-center gap-1.5">
+                    <span>🪔</span> UI/UX CRAFT • KERALA SOUL
+                  </div>
+                  <div class="text-xs font-semibold text-white mt-0.5">
+                    Glassmorphic Systems • 8pt Rhythm • Wireframes
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[9px] font-mono text-emerald-300 font-bold">
+                  3D PARALLAX
+                </span>
+              </div>
+            </div>
+
+            <!-- Floating 3D Chips -->
+            <div class="absolute -top-3 -left-3 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0E131C]/95 backdrop-blur-md border border-amber-500/40 shadow-xl cursor-default text-left">
+              <span class="text-sm">🎨</span>
+              <div>
+                <div class="text-[10px] font-bold text-white leading-tight">Design System Architecture</div>
+                <div class="text-[8px] font-medium text-amber-300 leading-tight">Tokens, Auto Layout &amp; Scales</div>
+              </div>
+            </div>
+
+            <div class="absolute -top-2 -right-3 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0E131C]/95 backdrop-blur-md border border-amber-500/40 shadow-xl cursor-default text-left">
+              <span class="text-sm">📐</span>
+              <div>
+                <div class="text-[10px] font-bold text-white leading-tight">8pt Spatial Rhythm</div>
+                <div class="text-[8px] font-medium text-amber-300 leading-tight">Responsive Layout Balance</div>
+              </div>
+            </div>
+
+            <div class="absolute bottom-12 -left-4 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0E131C]/95 backdrop-blur-md border border-amber-500/40 shadow-xl cursor-default text-left">
+              <span class="text-sm">🖊️</span>
+              <div>
+                <div class="text-[10px] font-bold text-white leading-tight">Vector Curves &amp; Precision</div>
+                <div class="text-[8px] font-medium text-amber-300 leading-tight">Bezier Anchors &amp; Prototyping</div>
+              </div>
+            </div>
+
+            <div class="absolute -bottom-3 -right-3 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0E131C]/95 backdrop-blur-md border border-amber-500/40 shadow-xl cursor-default text-left">
+              <span class="text-sm">🌴</span>
+              <div>
+                <div class="text-[10px] font-bold text-white leading-tight">Kerala Serenity &amp; Soul</div>
+                <div class="text-[8px] font-medium text-amber-300 leading-tight">Empathetic Human-Centered UX</div>
+              </div>
+            </div>
+
+            </div>
+
+            <!-- CTAs Placed Directly Beneath the Image Content on Right Hand Side -->
+            <div class="flex flex-wrap items-center justify-center gap-3.5 pt-1 w-full z-20">
+              <a href="#contact" onclick="window.soundFx.playChime()" class="px-6 sm:px-7 py-3.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 font-extrabold text-sm transition-all duration-300 shadow-lg shadow-amber-500/25 flex items-center gap-2 group hover:gap-3 cursor-pointer">
+                <span>Contact Us</span>
+                <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              </a>
+
+              <a href="#projects" onclick="window.soundFx.playClick()" class="px-5 sm:px-6 py-3.5 rounded-full bg-[#11151D] hover:bg-[#1A202C] border border-amber-500/30 hover:border-amber-400 text-amber-300 font-semibold text-sm transition-all duration-300 shadow-xs flex items-center gap-2 group cursor-pointer">
+                <div class="w-5 h-5 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform">
+                  <svg class="w-2.5 h-2.5 fill-amber-400" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <span>Explore Works</span>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         4. SELECTED WORKS (PROJECTS SECTION)
+         ========================================================================= -->
+    <section id="projects" class="py-20 sm:py-28 bg-[#090C12] border-t border-white/5 relative">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-4 text-left">
+          <div class="space-y-3">
+            <span class="text-[11px] font-bold tracking-[0.2em] text-amber-400 uppercase block font-mono">
+              FEATURED CASE STUDIES
+            </span>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+              Selected UI/UX Works
+            </h2>
+          </div>
+
+          <!-- Category Filter Buttons -->
+          <div class="flex flex-wrap items-center gap-2">
+            <button data-category="All" class="project-filter-btn px-4 py-1.5 rounded-full text-xs font-bold bg-amber-500 text-stone-950 cursor-pointer transition-colors shadow-xs">
+              All
+            </button>
+            <button data-category="Mobile App" class="project-filter-btn px-4 py-1.5 rounded-full text-xs font-medium bg-[#121620] text-zinc-300 hover:text-white cursor-pointer transition-colors border border-white/5">
+              Mobile Apps
+            </button>
+            <button data-category="Enterprise Platform" class="project-filter-btn px-4 py-1.5 rounded-full text-xs font-medium bg-[#121620] text-zinc-300 hover:text-white cursor-pointer transition-colors border border-white/5">
+              Enterprise Platforms
+            </button>
+            <button data-category="E-Commerce Website" class="project-filter-btn px-4 py-1.5 rounded-full text-xs font-medium bg-[#121620] text-zinc-300 hover:text-white cursor-pointer transition-colors border border-white/5">
+              E-Commerce
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Projects Grid -->
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"></div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         5. UI/UX CRAFT & SPECIALIZED TOOLING STACK
+         ========================================================================= -->
+    <section class="py-20 sm:py-24 bg-[#080A0D] border-t border-white/5 relative">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-4 text-left">
+          <div class="space-y-3">
+            <span class="text-[11px] font-bold tracking-[0.2em] text-amber-400 uppercase block font-mono">
+              CAPABILITIES &amp; TOOLING
+            </span>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+              UI/UX Craft &amp; Specialized Competencies
+            </h2>
+          </div>
+          <p class="text-sm text-zinc-300 max-w-md font-normal leading-relaxed md:text-right">
+            Grounding product vision into scalable, developer-ready design systems with rigorous accessibility standards.
+          </p>
+        </div>
+
+        <!-- 4 Skill Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mb-10 text-left">
+          <div class="p-5 sm:p-6 rounded-2xl bg-[#11151D] border border-amber-500/20 hover:border-amber-400/60 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-11 h-11 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center text-lg">
+                  👥
+                </div>
+                <span class="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-zinc-400">Discovery</span>
+              </div>
+              <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-amber-300 transition-colors mb-2">UX Research &amp; Strategy</h3>
+              <p class="text-xs text-zinc-300 leading-relaxed font-normal">User interviews, behavioral personas, journey mapping, IA, usability heuristics.</p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-white/10 flex items-center gap-1.5 text-[11px] text-emerald-400 font-medium">
+              <span>✓ Production Ready</span>
+            </div>
+          </div>
+
+          <div class="p-5 sm:p-6 rounded-2xl bg-[#11151D] border border-amber-500/20 hover:border-amber-400/60 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-11 h-11 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center text-lg">
+                  🖥️
+                </div>
+                <span class="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-zinc-400">Craft</span>
+              </div>
+              <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-amber-300 transition-colors mb-2">UI &amp; Visual Systems</h3>
+              <p class="text-xs text-zinc-300 leading-relaxed font-normal">Pixel-perfect visual design, token systems, micro-interactions, responsive states.</p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-white/10 flex items-center gap-1.5 text-[11px] text-emerald-400 font-medium">
+              <span>✓ Production Ready</span>
+            </div>
+          </div>
+
+          <div class="p-5 sm:p-6 rounded-2xl bg-[#11151D] border border-amber-500/20 hover:border-amber-400/60 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-11 h-11 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center text-lg">
+                  📐
+                </div>
+                <span class="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-zinc-400">Fidelity</span>
+              </div>
+              <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-amber-300 transition-colors mb-2">Prototyping &amp; Motion</h3>
+              <p class="text-xs text-zinc-300 leading-relaxed font-normal">Interactive click-through flows, component logic, micro-states, developer handoff.</p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-white/10 flex items-center gap-1.5 text-[11px] text-emerald-400 font-medium">
+              <span>✓ Production Ready</span>
+            </div>
+          </div>
+
+          <div class="p-5 sm:p-6 rounded-2xl bg-[#11151D] border border-amber-500/20 hover:border-amber-400/60 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-11 h-11 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center text-lg">
+                  ♿
+                </div>
+                <span class="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-zinc-400">Inclusion</span>
+              </div>
+              <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-amber-300 transition-colors mb-2">Accessibility (WCAG AAA)</h3>
+              <p class="text-xs text-zinc-300 leading-relaxed font-normal">High color contrast, inclusive ergonomics, tactile navigation, screen-reader parity.</p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-white/10 flex items-center gap-1.5 text-[11px] text-emerald-400 font-medium">
+              <span>✓ Production Ready</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tools Strip -->
+        <div class="p-6 rounded-2xl bg-[#121620] border border-amber-500/25 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-2 text-left">
+            <span class="text-lg">🛠️</span>
+            <div>
+              <div class="text-xs font-bold text-white">Daily Design Stack</div>
+              <div class="text-[10px] text-zinc-400">Industry-standard tools for research, UI &amp; vector art</div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2.5">
+            <div class="px-3.5 py-1.5 rounded-xl bg-[#0A0D12] border border-amber-500/30 text-xs font-bold text-zinc-200 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#1ABCFE] inline-block"></span>
+              <span>Figma</span>
+            </div>
+            <div class="px-3.5 py-1.5 rounded-xl bg-[#0A0D12] border border-amber-500/30 text-xs font-bold text-zinc-200 flex items-center gap-2">
+              <span class="px-1.5 py-0.2 rounded bg-[#001E36] text-[#31A8FF] text-[10px] font-bold">Ps</span>
+              <span>Photoshop</span>
+            </div>
+            <div class="px-3.5 py-1.5 rounded-xl bg-[#0A0D12] border border-amber-500/30 text-xs font-bold text-zinc-200 flex items-center gap-2">
+              <span class="px-1.5 py-0.2 rounded bg-[#330000] text-[#FF9A00] text-[10px] font-bold">Ai</span>
+              <span>Illustrator</span>
+            </div>
+            <div class="px-3.5 py-1.5 rounded-xl bg-[#0A0D12] border border-amber-500/30 text-xs font-bold text-zinc-200 flex items-center gap-2">
+              <span class="px-1.5 py-0.2 rounded bg-[#FFD02F] text-[#050038] text-[10px] font-bold">Miro</span>
+              <span>Miro</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         6. ABOUT ME SECTION (Minimal & Editorial)
+         ========================================================================= -->
+    <section id="about" class="py-20 sm:py-28 bg-[#080A0D] border-t border-white/5 relative overflow-hidden">
+      <div class="max-w-5xl mx-auto px-5 sm:px-8 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14 items-center">
+          
+          <!-- Left: Minimal Portrait -->
+          <div class="md:col-span-5 flex justify-center md:justify-start">
+            <div class="relative w-full max-w-[340px] group">
+              <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 bg-[#0E121B] shadow-2xl transition-all duration-300 group-hover:border-amber-500/40">
+                <div class="aspect-[4/4.8] w-full overflow-hidden bg-black/40">
+                  <img src="assets/profile.jpg" alt="Ananthakrishnan K Nair - UI/UX Designer" class="w-full h-full object-cover object-top filter grayscale-[15%] contrast-[105%] group-hover:grayscale-0 transition-all duration-700 ease-out" />
+                </div>
+                <div class="p-4 bg-[#0D111A]/95 border-t border-white/10 flex items-center justify-between text-left">
+                  <div>
+                    <div class="text-sm font-bold text-white tracking-tight">Ananthakrishnan K Nair</div>
+                    <div class="text-xs text-amber-300/80 font-mono">Senior UI/UX Designer &amp; Educator</div>
+                  </div>
+                  <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-mono font-medium">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Available</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Minimal Editorial Story & Quick Facts -->
+          <div class="md:col-span-7 space-y-6 text-left">
+            <div class="inline-flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-amber-400">
+              <span>✨</span>
+              <span>About Me</span>
+            </div>
+
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-snug">
+              Bridging human psychology, scalable design systems, and engineering reality.
+            </h2>
+
+            <div class="space-y-3 text-sm sm:text-base text-zinc-300 leading-relaxed font-normal">
+              <p>
+                I am a UI/UX Designer and Design Educator based in Kerala, India. With a <strong class="text-amber-300 font-semibold">Master of Computer Applications (MCA)</strong>, I approach interfaces with rare technical empathy—ensuring that every design decision in Figma translates smoothly into clean frontend code.
+              </p>
+              <p class="text-xs sm:text-sm text-zinc-400">
+                Currently at <strong class="text-white font-medium">Zoople Technologies</strong> in Kochi, I lead digital product design initiatives and mentor aspiring designers. Having trained over <span class="text-emerald-300 font-mono font-medium">500+ students</span>, teaching has refined my instinct for intuitive navigation, heuristic rigor, and WCAG accessibility standards.
+              </p>
+            </div>
+
+            <!-- Minimal Facts Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 pb-1 border-y border-white/5 py-4">
+              <div class="space-y-0.5">
+                <div class="text-[10px] font-mono uppercase tracking-wider text-zinc-400">Experience</div>
+                <div class="text-base sm:text-lg font-bold text-white font-mono">3+ Years</div>
+                <div class="text-[11px] text-zinc-400 leading-tight">Web &amp; Mobile Products</div>
+              </div>
+              <div class="space-y-0.5">
+                <div class="text-[10px] font-mono uppercase tracking-wider text-zinc-400">Mentorship</div>
+                <div class="text-base sm:text-lg font-bold text-white font-mono">500+</div>
+                <div class="text-[11px] text-zinc-400 leading-tight">Designers Trained at Zoople</div>
+              </div>
+              <div class="space-y-0.5">
+                <div class="text-[10px] font-mono uppercase tracking-wider text-zinc-400">Foundation</div>
+                <div class="text-base sm:text-lg font-bold text-white font-mono">MCA</div>
+                <div class="text-[11px] text-zinc-400 leading-tight">Technical Design Empathy</div>
+              </div>
+              <div class="space-y-0.5">
+                <div class="text-[10px] font-mono uppercase tracking-wider text-zinc-400">Location</div>
+                <div class="text-base sm:text-lg font-bold text-white font-mono">Kerala</div>
+                <div class="text-[11px] text-zinc-400 leading-tight">India • Available Globally</div>
+              </div>
+            </div>
+
+            <!-- Action Buttons: Download vs View Resume -->
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+              <a href="Ananthakrishnan_K_Nair_Resume.pdf" download="Ananthakrishnan_K_Nair_Resume.pdf" onclick="window.soundFx.playPop()" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 font-bold text-xs sm:text-sm transition-all duration-300 shadow-md shadow-amber-500/20 flex items-center gap-2 cursor-pointer group" title="Download Resume PDF">
+                <span>Download Resume</span>
+                <svg class="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003 3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              </a>
+
+              <button onclick="window.openResumeModal()" class="trigger-view-resume px-4 py-2.5 rounded-full bg-[#11151D] hover:bg-[#161C26] border border-white/10 hover:border-amber-500/40 text-zinc-300 hover:text-white text-xs sm:text-sm font-medium transition-all duration-300 flex items-center gap-1.5 cursor-pointer" title="View Resume Online">
+                <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                <span>View Resume</span>
+              </button>
+
+              <a href="#contact" onclick="window.soundFx.playChime()" class="px-4 py-2.5 rounded-full bg-[#11151D] hover:bg-[#161C26] border border-amber-500/30 hover:border-amber-400 text-amber-300 font-semibold text-xs sm:text-sm transition-all duration-300 flex items-center gap-1.5 cursor-pointer">
+                <span>Get in Touch</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              </a>
+
+              <!-- Social Pills -->
+              <a href="https://www.linkedin.com/in/ananthakrishnan-k-nair" target="_blank" rel="noopener noreferrer" onclick="window.soundFx.playClick()" class="p-2.5 rounded-full bg-[#11151D] border border-white/10 hover:border-sky-400/60 text-zinc-400 hover:text-sky-300 transition-colors cursor-pointer" title="LinkedIn Profile" aria-label="LinkedIn">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+              </a>
+
+              <a href="https://www.behance.net/ananthak7" target="_blank" rel="noopener noreferrer" onclick="window.soundFx.playClick()" class="p-2.5 rounded-full bg-[#11151D] border border-white/10 hover:border-amber-400/60 text-zinc-400 hover:text-amber-300 transition-colors cursor-pointer" title="Behance Portfolio" aria-label="Behance">
+                <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         7. FITTS'S LAW SPEED TEST ARENA (Dedicated Ergonomics Engine)
+         ========================================================================= -->
+    <section id="interactive-game" class="py-20 sm:py-28 bg-[#080A0D] border-t border-white/5 relative overflow-hidden">
+      <div class="max-w-5xl mx-auto px-5 sm:px-8 relative z-10">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 border-b border-amber-500/20 pb-6 gap-4 text-left">
+          <div class="space-y-2 max-w-2xl">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-xs font-mono font-bold text-amber-300">
+              <span>✨</span>
+              <span>UX SPEED LAB • MOTOR ERGONOMICS</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              Fitts&apos;s Law Speed Test
+            </h2>
+            <p class="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed">
+              In digital product design, speed is physics. Fitts&apos;s Law demonstrates that the time required to rapidly acquire a target is a function of the distance to the target and its width. Adjust the target size below to feel how tap precision shifts in real time.
+            </p>
+          </div>
+
+          <div class="self-start md:self-end">
+            <button id="fitts-reset-btn" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#121620] hover:bg-[#1A202C] border border-amber-500/30 text-amber-300 text-xs font-semibold transition-colors cursor-pointer">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+              <span>Reset Trials</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          
+          <!-- Interactive Target Area -->
+          <div class="lg:col-span-8 p-5 sm:p-6 rounded-3xl bg-[#10141E] border border-amber-500/30 shadow-2xl relative space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-amber-500/20 text-xs font-semibold text-amber-300">
+              <div class="flex items-center gap-2">
+                <span class="text-base">🎯</span>
+                <span class="font-mono uppercase tracking-wider text-[11px]">Click the Golden Target as fast as possible</span>
+              </div>
+              <span class="text-[11px] font-mono text-zinc-400">
+                TRIALS: <strong id="fitts-total-taps" class="text-white">0</strong>
+              </span>
+            </div>
+
+            <!-- Area -->
+            <div class="relative w-full h-[340px] sm:h-[380px] rounded-2xl bg-[#090C12] border border-white/10 overflow-hidden select-none shadow-inner">
+              <div class="absolute inset-0 bg-[radial-gradient(#27272a_1px,transparent_1px)] [background-size:24px_24px] opacity-25 pointer-events-none"></div>
+
+              <button id="fitts-target" type="button" class="absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 text-stone-950 font-extrabold text-xs flex items-center justify-center transition-all duration-75 shadow-lg shadow-amber-500/40 active:scale-90 hover:scale-105 cursor-pointer border border-amber-300/60" style="left: 50%; top: 50%; width: 64px; height: 64px;" aria-label="Speed Target">
+                <span class="text-lg pointer-events-none">🎯</span>
+              </button>
+            </div>
+
+            <!-- Size Slider -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2 text-xs">
+              <div class="flex items-center gap-3 w-full sm:w-auto">
+                <span class="font-bold text-zinc-300 shrink-0">Target Size:</span>
+                <input id="fitts-size-slider" type="range" min="32" max="96" step="4" value="64" class="accent-amber-500 cursor-pointer w-full sm:w-36" />
+                <span id="fitts-size-val" class="font-mono font-bold text-amber-300 shrink-0 w-12 text-right">64px</span>
+              </div>
+              <div id="fitts-compliance-badge" class="px-2.5 py-1 rounded-full border text-[10px] font-mono font-bold text-amber-400 bg-amber-950/40 border-amber-500/40">
+                Optimal Thumb Zone Ergonomics (≥ 60px)
+              </div>
+            </div>
+          </div>
+
+          <!-- Telemetry & Science Column -->
+          <div class="lg:col-span-4 space-y-4 text-left">
+            <div class="p-5 sm:p-6 rounded-3xl bg-[#10141E] border border-amber-500/30 shadow-2xl space-y-4">
+              <div class="flex items-center gap-1.5 text-xs font-bold text-amber-400 uppercase tracking-wider font-mono">
+                <span>⚡</span>
+                <span>MOTOR TELEMETRY</span>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div class="p-3.5 rounded-2xl bg-[#161C26] border border-white/5">
+                  <span class="text-[10px] text-zinc-400 block font-mono font-bold">LAST SPEED</span>
+                  <span id="fitts-last-speed" class="text-2xl font-black text-white mt-1 block font-mono">--</span>
+                </div>
+                <div class="p-3.5 rounded-2xl bg-[#161C26] border border-white/5">
+                  <span class="text-[10px] text-zinc-400 block font-mono font-bold">AVG (LAST 6)</span>
+                  <span id="fitts-avg-speed" class="text-2xl font-black text-amber-400 mt-1 block font-mono">--</span>
+                </div>
+              </div>
+
+              <div class="p-3.5 rounded-2xl bg-[#161C26] border border-white/5 flex items-center justify-between text-xs font-mono">
+                <div>
+                  <span class="text-[10px] text-zinc-400 block">PERSONAL BEST</span>
+                  <span id="fitts-best-speed" class="text-base font-bold text-emerald-400">--</span>
+                </div>
+              </div>
+
+              <div id="fitts-rating-pill" class="hidden p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-medium text-center"></div>
+
+              <!-- Scientific Formula -->
+              <div class="p-4 rounded-2xl bg-black/40 border border-white/10 text-xs space-y-2">
+                <div class="font-bold text-amber-300 flex items-center gap-1.5">
+                  <span>🛡️</span>
+                  <span>The Fitts&apos;s Law Formula:</span>
+                </div>
+                <div class="font-mono text-xs text-amber-300 bg-[#0A0D14] px-3 py-1.5 rounded-lg border border-amber-500/30 text-center">
+                  MT = a + b · log₂(2D / W)
+                </div>
+                <p class="text-zinc-300 text-[11px] leading-relaxed font-normal pt-1">
+                  Target acquisition speed grows exponentially as touch targets reach thumb-ergonomic sweet spots (&ge; 48px). Smaller targets force physical micro-corrections, dramatically increasing task completion time.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         8. CONTACT SECTION
+         ========================================================================= -->
+    <section id="contact" class="py-20 sm:py-28 bg-[#090C12] border-t border-white/5 relative">
+      <div class="max-w-4xl mx-auto px-5 sm:px-8 text-left">
+        
+        <div class="space-y-6">
+          <div class="space-y-2">
+            <span class="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest block">
+              DIRECT INQUIRY
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Let&apos;s talk design</h2>
+            <p class="text-xs sm:text-sm text-zinc-300">
+              Send a message directly to Ananthakrishnan or copy contact details below.
+            </p>
+          </div>
+
+          <!-- Quick Info Strip: Email & Location only (NO PHONE) -->
+          <div class="p-4 rounded-2xl bg-[#141923] border border-amber-500/20 space-y-2.5">
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-zinc-400">Email:</span>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-amber-300 select-all font-semibold">ananthakrishnanuiux@gmail.com</span>
+                <button id="copy-email-btn" class="p-1 rounded hover:bg-white/10 text-zinc-400 hover:text-white transition-colors cursor-pointer" title="Copy Email">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                </button>
+              </div>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-zinc-400">Location:</span>
+              <span class="text-emerald-400 font-medium">Kerala, India (IST)</span>
+            </div>
+          </div>
+
+          <div id="copy-toast" class="hidden p-2 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-mono text-center">
+            Email copied to clipboard!
+          </div>
+
+          <!-- Contact Form -->
+          <form id="contact-form" class="space-y-4">
+            <div>
+              <label class="text-xs font-bold text-zinc-300 block mb-1">Your Name</label>
+              <input type="text" required placeholder="e.g. Maya Menon" class="w-full px-4 py-2.5 rounded-xl bg-[#161B24] border border-amber-500/25 focus:border-amber-400 focus:outline-none text-white text-xs placeholder:text-zinc-500" />
+            </div>
+            <div>
+              <label class="text-xs font-bold text-zinc-300 block mb-1">Your Email</label>
+              <input type="email" required placeholder="name@company.com" class="w-full px-4 py-2.5 rounded-xl bg-[#161B24] border border-amber-500/25 focus:border-amber-400 focus:outline-none text-white text-xs placeholder:text-zinc-500" />
+            </div>
+            <div>
+              <label class="text-xs font-bold text-zinc-300 block mb-1">Message / Product Vision</label>
+              <textarea rows="4" required placeholder="Tell me about your product requirements, team context, or design timeline..." class="w-full px-4 py-2.5 rounded-xl bg-[#161B24] border border-amber-500/25 focus:border-amber-400 focus:outline-none text-white text-xs placeholder:text-zinc-500 resize-none"></textarea>
+            </div>
+            <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 font-bold text-xs uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer">
+              <span>Send Message</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+            </button>
+          </form>
+
+          <div id="contact-form-success" class="hidden p-6 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 text-center space-y-2">
+            <span class="text-2xl">🎉</span>
+            <h4 class="text-base font-bold text-white">Message Dispatched!</h4>
+            <p class="text-xs text-zinc-300">Thank you for reaching out. Ananthakrishnan will get back to you within 24 hours.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       9. FOOTER
+       ========================================================================= -->
+  <footer class="py-12 bg-[#06080B] border-t border-amber-500/20 text-xs text-zinc-400">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <span class="text-base">🪔</span>
+        <div>
+          <div class="font-bold text-white">Ananthakrishnan K Nair</div>
+          <div class="text-[10px] text-amber-400">UI/UX Designer &amp; Design System Architect</div>
+        </div>
+      </div>
+
+      <nav class="flex flex-wrap items-center gap-6 text-zinc-400">
+        <a href="#hero" class="hover:text-amber-300 transition-colors">Home</a>
+        <a href="#projects" class="hover:text-amber-300 transition-colors">Projects</a>
+        <a href="ux-journal.html" class="hover:text-emerald-300 transition-colors text-emerald-400">UX Journal</a>
+        <a href="#about" class="hover:text-amber-300 transition-colors">About</a>
+        <a href="#interactive-game" class="hover:text-amber-300 transition-colors">Fitts&apos;s Law</a>
+        <a href="#contact" class="hover:text-amber-300 transition-colors">Contact</a>
+      </nav>
+
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="px-3.5 py-1.5 rounded-full bg-[#121620] hover:bg-amber-500 border border-amber-500/30 text-amber-300 hover:text-stone-950 transition-all font-semibold cursor-pointer">
+        Back to top ↑
+      </button>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       10. RESUME MODAL (Interactive vs Original PDF with Zero Download Trigger on View)
+       ========================================================================= -->
+  <div id="resume-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md">
+    <div class="relative w-full max-w-4xl max-h-[92vh] flex flex-col rounded-3xl bg-[#0E1218] border-2 border-amber-500/35 shadow-2xl overflow-hidden text-white text-left">
+      
+      <!-- Modal Header -->
+      <div class="flex flex-wrap items-center justify-between px-5 sm:px-6 py-3.5 border-b border-amber-500/25 bg-[#141923] gap-3">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center font-bold text-sm">
+            🪔
+          </span>
+          <div>
+            <h2 class="text-sm sm:text-base font-bold text-white leading-tight">Ananthakrishnan K Nair — Resume</h2>
+            <p class="text-[11px] text-amber-300/80 font-mono">Senior UI/UX Designer • Kerala, India</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- View Switcher -->
+          <div class="flex items-center bg-[#090C12] p-0.5 rounded-full border border-white/10 text-xs font-mono">
+            <button id="resume-tab-interactive" class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30 shadow-xs cursor-pointer">
+              Interactive
+            </button>
+            <button id="resume-tab-pdf" class="px-3 py-1 rounded-full text-zinc-400 hover:text-white cursor-pointer">
+              Original PDF
+            </button>
+          </div>
+
+          <!-- Open in New Tab -->
+          <a href="Ananthakrishnan_K_Nair_Resume.pdf" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-1 p-2 rounded-full text-zinc-400 hover:text-white hover:bg-white/10 transition-colors" title="Open PDF in New Tab">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          </a>
+
+          <!-- Download PDF -->
+          <a href="Ananthakrishnan_K_Nair_Resume.pdf" download="Ananthakrishnan_K_Nair_Resume.pdf" onclick="window.soundFx.playPop()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 transition-colors shadow-xs cursor-pointer" title="Download PDF">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003 3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            <span>Download PDF</span>
+          </a>
+
+          <button id="close-resume-modal" class="p-1.5 rounded-full text-zinc-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer" aria-label="Close modal">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- View 1: Original PDF Viewer (iframe) -->
+      <div id="resume-view-pdf" class="hidden flex-1 w-full bg-[#080A0D] min-h-[500px]">
+        <iframe src="Ananthakrishnan_K_Nair_Resume.pdf#view=FitH" class="w-full h-[75vh] border-0" title="Resume PDF Viewer"></iframe>
+      </div>
+
+      <!-- View 2: Interactive Document Content -->
+      <div id="resume-view-interactive" class="flex-1 overflow-y-auto p-6 sm:p-8 space-y-8 font-sans">
+        <div class="border-b border-amber-500/20 pb-6 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+            <div>
+              <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Ananthakrishnan K Nair</h1>
+              <div class="text-sm font-bold text-amber-400 mt-0.5">Senior UI/UX Designer (3+ Years Experience)</div>
+            </div>
+            <div class="flex flex-col gap-1.5 text-xs text-zinc-300">
+              <div class="flex items-center gap-2">
+                <span class="text-amber-400">✉️</span>
+                <a href="mailto:ananthakrishnanuiux@gmail.com" class="hover:text-amber-300 transition-colors font-medium">ananthakrishnanuiux@gmail.com</a>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-amber-400">📍</span>
+                <span>Karthika, Mavelikkara, Alappuzha, Kerala, India</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed pt-2">
+            UI/UX Designer &amp; Trainer with 3+ years of experience designing intuitive digital experiences and mentoring aspiring designers. Skilled in Figma, Photoshop, Illustrator, Adobe XD, wireframing, prototyping, user research, and usability testing.
+          </p>
+        </div>
+
+        <!-- Experience -->
+        <div class="space-y-4">
+          <h3 class="text-xs font-bold tracking-wider text-amber-400 uppercase font-mono">Professional Experience</h3>
+          <div class="p-5 rounded-2xl bg-[#141923] border border-amber-500/20 space-y-2">
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="text-sm font-bold text-white">UI/UX Designer &amp; Trainer</div>
+                <div class="text-xs text-amber-300">Zoople Technologies • Ernakulam, Kerala</div>
+              </div>
+              <span class="text-xs font-mono text-zinc-400">July, 2023 - Present</span>
+            </div>
+            <ul class="text-xs text-zinc-300 space-y-1.5 list-disc list-inside pt-1">
+              <li>Designed user-friendly web and mobile interfaces and interactive prototypes using user-centered design principles.</li>
+              <li>Created wireframes, user flows, high-fidelity UI designs and prototypes to communicate design solutions.</li>
+              <li>Trained 500+ students in UI/UX design, including Figma, wireframing, prototyping, design systems and usability.</li>
+              <li>Reviewed and provided design feedback on 600+ UI/UX assignments and projects, focusing on usability and visual consistency.</li>
+            </ul>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-[#141923] border border-amber-500/20 space-y-2">
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="text-sm font-bold text-white">Software Trainee</div>
+                <div class="text-xs text-amber-300">Logiprompt Techno Solutions India Pvt. • Trivandrum</div>
+              </div>
+              <span class="text-xs font-mono text-zinc-400">Jan, 2023 - June, 2023</span>
+            </div>
+            <ul class="text-xs text-zinc-300 space-y-1.5 list-disc list-inside pt-1">
+              <li>Trained in front-end and back-end web development with HTML, CSS, and Bootstrap.</li>
+              <li>Designed web applications using HTML, CSS and Bootstrap.</li>
+              <li>Built web applications using Laravel, PHP and MySQL.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="space-y-4">
+          <h3 class="text-xs font-bold tracking-wider text-amber-400 uppercase font-mono">Education</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-4 rounded-2xl bg-[#141923] border border-amber-500/20 space-y-1">
+              <div class="text-sm font-bold text-white">Master of Computer Application (MCA)</div>
+              <div class="text-xs text-amber-300">Sree Narayan Institute of Technology, Kollam</div>
+              <div class="text-[11px] font-mono text-zinc-400">2020 - 2022</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-[#141923] border border-amber-500/20 space-y-1">
+              <div class="text-sm font-bold text-white">Bachelor of Computer Application (BCA)</div>
+              <div class="text-xs text-amber-300">IHRD, Mavelikara</div>
+              <div class="text-[11px] font-mono text-zinc-400">2017 - 2020</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-4 bg-[#141923] border-t border-amber-500/25 flex items-center justify-between">
+        <div class="text-xs text-zinc-400">Available for remote &amp; on-site opportunities</div>
+        <a href="Ananthakrishnan_K_Nair_Resume.pdf" download="Ananthakrishnan_K_Nair_Resume.pdf" onclick="window.soundFx.playPop()" class="px-5 py-2 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 font-bold text-xs transition-colors flex items-center gap-1.5 cursor-pointer shadow-md">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003 3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          <span>Download PDF</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       11. PROJECT CASE STUDY DETAILS MODAL
+       ========================================================================= -->
+  <div id="project-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md">
+    <div class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl bg-[#0E1218] border-2 border-amber-500/35 p-6 sm:p-8 shadow-2xl text-white">
+      <div id="project-modal-content"></div>
+    </div>
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/soundFx.js"></script>
+  <script src="js/portfolioData.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

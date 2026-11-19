@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UX Journal &amp; Field Notes — Ananthakrishnan K Nair</title>
+  <meta name="description" content="A comprehensive UI/UX reference manual covering Nielsen's 10 Heuristics, Persona types, UI Design Fundamentals, and Behavioral Psychology Laws." />
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪔</text></svg>" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#080A0D',
+            cardDark: '#10141E',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Space Grotesk', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-[#080A0D] text-[#FBF7EE] min-h-screen flex flex-col font-sans relative selection:bg-amber-500 selection:text-stone-950">
+
+  <!-- Ambient Particles -->
+  <canvas id="particles-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-30"></canvas>
+
+  <!-- Sticky Header -->
+  <header class="sticky top-0 left-0 right-0 z-40 bg-[#080A0D]/95 backdrop-blur-md border-b border-white/5 py-3.5 px-5 sm:px-8">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5 text-xs font-semibold text-zinc-300 hover:text-amber-300 transition-colors" onclick="window.soundFx.playClick()">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        <span>Back to Main Portfolio</span>
+      </a>
+
+      <div class="flex items-center gap-3">
+        <span class="text-xs font-mono font-bold text-amber-400">ANANTHAKRISHNAN • UX JOURNAL</span>
+        <a href="index.html#contact" class="hidden sm:inline-block px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold hover:bg-amber-500 hover:text-stone-950 transition-colors">
+          Get in Touch
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-7xl mx-auto px-5 sm:px-8 py-10 z-10 relative w-full">
+    
+    <!-- Hero Banner -->
+    <div class="mb-10 text-left space-y-3 border-b border-amber-500/20 pb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold">
+        <span>📚</span>
+        <span>RESEARCH &amp; DESIGN SYSTEM REPOSITORY</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+        The UX Journal &amp; Design Fundamentals
+      </h1>
+      <p class="text-sm sm:text-base text-zinc-300 max-w-3xl leading-relaxed">
+        A structured digital playbook documenting the empirical principles of human-computer interaction, NN/g heuristics, persona frameworks, atomic design systems, and behavioral psychology laws.
+      </p>
+
+      <!-- Live Filter Tabs -->
+      <div class="flex flex-wrap items-center gap-2 pt-4" id="journal-tabs">
+        <button data-cat="all" class="journal-tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-amber-500 text-stone-950 cursor-pointer shadow-xs">
+          All Guides (55+)
+        </button>
+        <button data-cat="key-principles" class="journal-tab-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-[#121620] text-zinc-300 hover:text-white border border-white/5 cursor-pointer">
+          Key Principles
+        </button>
+        <button data-cat="heuristics" class="journal-tab-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-[#121620] text-zinc-300 hover:text-white border border-white/5 cursor-pointer">
+          10 Heuristics (NN/g)
+        </button>
+        <button data-cat="persona" class="journal-tab-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-[#121620] text-zinc-300 hover:text-white border border-white/5 cursor-pointer">
+          Persona Matrix
+        </button>
+        <button data-cat="ui-fundamentals" class="journal-tab-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-[#121620] text-zinc-300 hover:text-white border border-white/5 cursor-pointer">
+          UI Fundamentals
+        </button>
+        <button data-cat="psychology" class="journal-tab-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-[#121620] text-zinc-300 hover:text-white border border-white/5 cursor-pointer">
+          Psychology Laws
+        </button>
+      </div>
+    </div>
+
+    <!-- Live Search Bar -->
+    <div class="mb-8">
+      <div class="relative w-full max-w-md">
+        <input type="text" id="journal-search" placeholder="Search laws, heuristics, persona types, tokens..." class="w-full px-4 py-2.5 pl-10 rounded-xl bg-[#10141E] border border-amber-500/25 focus:border-amber-400 focus:outline-none text-white text-xs placeholder:text-zinc-500" />
+        <svg class="w-4 h-4 text-zinc-400 absolute left-3.5 top-3 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      </div>
+    </div>
+
+    <!-- Cards Grid -->
+    <div id="journal-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 text-left"></div>
+
+  </main>
+
+  <footer class="py-8 bg-[#06080B] border-t border-white/5 text-xs text-zinc-400 text-center">
+    Ananthakrishnan K Nair • UI/UX Designer &amp; Educator • Kerala, India
+  </footer>
+
+  <script src="js/soundFx.js"></script>
+  <script>
+    // Journal Data & Search Engine
+    const JOURNAL_DATA = [
+      // 1. Key Principles
+      { title: "User-Centered Design (UCD)", cat: "key-principles", badge: "Key Principle #1", desc: "Focus on designing with the user's needs, goals, and behaviors in mind. Understand your audience through research and ensure design directly addresses their pain points.", takeaway: "Conduct contextual inquiries and validation interviews prior to hi-fi prototyping." },
+      { title: "Usability & Efficiency", cat: "key-principles", badge: "Key Principle #2", desc: "Ensure the product is easy to use, intuitive, and efficient. Users should learn how to navigate quickly and complete critical tasks with minimal cognitive friction.", takeaway: "Minimize clicks to core tasks; streamline navigational depth." },
+      { title: "Consistency & Familiarity", cat: "key-principles", badge: "Key Principle #3", desc: "Maintain uniformity across design elements, typography, spacing, and micro-interactions so users can predict system behavior without hesitation.", takeaway: "Implement global Figma tokens and atomic design libraries across all screens." },
+      { title: "Accessibility (WCAG AAA)", cat: "key-principles", badge: "Key Principle #4", desc: "Design for inclusivity by honoring visual, auditory, and motor abilities. Ensure high contrast ratios (>= 7:1 for AAA) and keyboard navigable touch targets.", takeaway: "Test color palettes with color blindness simulators and contrast analyzers." },
+      { title: "Immediate Feedback & System Status", cat: "key-principles", badge: "Key Principle #5", desc: "Provide instant, clear feedback to users about their actions via loading states, skeleton screens, and toast confirmations.", takeaway: "Never leave users wondering if a form was submitted; show instantaneous visual response." },
+      { title: "Interaction Design & Predictability", cat: "key-principles", badge: "Key Principle #6", desc: "Create seamless interactions that feel natural. Ensure every click, swipe, or tap leads to a completely predictable outcome.", takeaway: "Follow established mobile OS gestures (swipe-to-dismiss, pinch-to-zoom)." },
+      { title: "Performance & Responsive Speed", cat: "key-principles", badge: "Key Principle #7", desc: "Optimize for speed and latency. Fast, smooth experiences without lag enhance trust and keep users deeply engaged.", takeaway: "Keep DOM size lean, optimize asset payloads, and maintain 60fps micro-animations." },
+      { title: "User Control & Freedom (Undo)", cat: "key-principles", badge: "Key Principle #8", desc: "Allow users to undo actions, escape modals, and make choices freely without rigid system traps.", takeaway: "Provide prominent 'Cancel' and 'Undo' snackbars for destructive actions." },
+      { title: "Iterative Testing & Design Refinement", cat: "key-principles", badge: "Key Principle #9", desc: "Continuously test, prototype, and improve based on real user observation and usability telemetry.", takeaway: "Run 5-user usability testing rounds to uncover 85% of critical UX bottlenecks." },
+      { title: "Emotional Impact & Delight", cat: "key-principles", badge: "Key Principle #10", desc: "Design to delight users, making digital workflows not just usable, but genuinely enjoyable through tasteful micro-animations and microcopy.", takeaway: "Celebrate milestone completions with gentle haptics and celebratory feedback." },
+
+      // 2. 10 Heuristics
+      { title: "Visibility of System Status", cat: "heuristics", badge: "Heuristic #1", desc: "Users must always know the current system status through appropriate, timely feedback within reasonable time.", takeaway: "Show clear progress bars for uploads and active states for asynchronous requests." },
+      { title: "Match Between System & Real World", cat: "heuristics", badge: "Heuristic #2", desc: "The system should speak the user's language, with words, phrases, and concepts familiar to the user rather than system-oriented jargon.", takeaway: "Use real-world metaphors like shopping carts, folders, and trash cans." },
+      { title: "User Control and Freedom", cat: "heuristics", badge: "Heuristic #3", desc: "Users often choose system functions by mistake and will need a clearly marked emergency exit to leave the unwanted state without an extended dialogue.", takeaway: "Support Undo/Redo and clear Close (X) buttons on all dialogs." },
+      { title: "Consistency and Standards", cat: "heuristics", badge: "Heuristic #4", desc: "Users should not have to wonder whether different words, situations, or actions mean the same thing. Follow platform conventions.", takeaway: "Adhere strictly to iOS Human Interface and Android Material guidelines." },
+      { title: "Error Prevention", cat: "heuristics", badge: "Heuristic #5", desc: "Even better than good error messages is a careful design which prevents a problem from occurring in the first place.", takeaway: "Use input constraints, sensible defaults, and confirmation dialogs for destructive events." },
+      { title: "Recognition Rather than Recall", cat: "heuristics", badge: "Heuristic #6", desc: "Minimize user memory load by making elements, actions, and options visible. The user should not have to remember information from one part to another.", takeaway: "Provide recent searches, visual dropdown options, and breadcrumb trails." },
+      { title: "Flexibility and Efficiency of Use", cat: "heuristics", badge: "Heuristic #7", desc: "Accelerators unseen by novice users may often speed up the interaction for expert users so that the system caters to both inexperienced and experienced users.", takeaway: "Introduce keyboard shortcuts, swipe macros, and customizable quick-actions." },
+      { title: "Aesthetic and Minimalist Design", cat: "heuristics", badge: "Heuristic #8", desc: "Dialogues should not contain information which is irrelevant or rarely needed. Every extra unit of information competes with relevant units.", takeaway: "De-clutter secondary elements; preserve high signal-to-noise ratio." },
+      { title: "Help Users Recognize & Recover from Errors", cat: "heuristics", badge: "Heuristic #9", desc: "Error messages should be expressed in plain language (no codes), precisely indicate the problem, and constructively suggest a solution.", takeaway: "State 'Card expired in 2023. Please check expiry date' rather than 'Error 402'." },
+      { title: "Help and Documentation", cat: "heuristics", badge: "Heuristic #10", desc: "Even though it is better if the system can be used without documentation, it may be necessary to provide help. It should be easy to search and task-focused.", takeaway: "Provide contextual tooltips and concise, searchable help documentation." },
+
+      // 3. Persona Matrix
+      { title: "Customer Persona", cat: "persona", badge: "Persona Type", desc: "Represents the overall customer or account. Balances business return, subscription budgets, and operational value.", takeaway: "Design unified billing management, transparent subscription tiers, and executive summary dashboards." },
+      { title: "Buyer Persona", cat: "persona", badge: "Persona Type", desc: "Represents the purchaser or executive decision-maker evaluating procurement terms.", takeaway: "Provide downloadable spec sheets, enterprise tier comparisons, and security compliance badges." },
+      { title: "User Persona", cat: "persona", badge: "Persona Type", desc: "Represents the everyday hands-on end user operating the software to complete routine tasks.", takeaway: "Prioritize ergonomic speed, clear keyboard shortcuts, and minimal daily task friction." },
+      { title: "Stakeholder Persona", cat: "persona", badge: "Persona Type", desc: "Represents internal or legal parties affected by the purchase or project implementation.", takeaway: "Design audit trails, compliance export logs, and role-based access control (RBAC)." },
+      { title: "Champion Persona", cat: "persona", badge: "Persona Type", desc: "Internal team advocate who enthusiastically tests and promotes your solution to management.", takeaway: "Provide team invite links, interactive onboarding checklists, and quick-win templates." },
+      { title: "Gatekeeper Persona", cat: "persona", badge: "Persona Type", desc: "Controls executive access and filters software evaluation requests.", takeaway: "Deliver single-page executive PDF overviews and instant live demo access." },
+
+      // 4. UI Fundamentals
+      { title: "Color Theory & Contrast", cat: "ui-fundamentals", badge: "UI Fundamental", desc: "Mastering monochromatic, complementary, and triadic schemes. Applying 60-30-10 palette rules and ensuring WCAG AAA contrast (7.0:1).", takeaway: "Reserve high-saturation brand colors exclusively for primary CTAs and critical states." },
+      { title: "Typography Scale & Hierarchy", cat: "ui-fundamentals", badge: "UI Fundamental", desc: "Setting harmonious typographic scales using 1.25 (Major Third) or 1.333 (Perfect Fourth) ratios. Establishing line-heights at 1.4-1.6x font size.", takeaway: "Limit font families to 2 complementary typefaces: one for display headings, one for high-legibility body." },
+      { title: "8pt Spatial Rhythm System", cat: "ui-fundamentals", badge: "UI Fundamental", desc: "All margins, padding, and layout dimensions are multiples of 8 (8, 16, 24, 32, 48, 64px). Eliminates arbitrary spacing guesswork.", takeaway: "Creates subconscious visual harmony and streamlines designer-developer handoff." },
+      { title: "Visual Hierarchy & Balance", cat: "ui-fundamentals", badge: "UI Fundamental", desc: "Guiding the eye through size contrast, weight, and spatial placement. Leveraging F-Pattern and Z-Pattern scanning eye routes.", takeaway: "Primary CTAs must possess the strongest visual weight on the viewport." },
+      { title: "Atomic Design Systems", cat: "ui-fundamentals", badge: "UI Fundamental", desc: "Architecting scalable interfaces from Atoms (tokens, buttons) to Molecules (inputs with labels), Organisms (navbars), and Templates.", takeaway: "Ensures total component modularity and effortless multi-brand theming." },
+
+      // 5. Psychology Laws
+      { title: "Fitts's Law", cat: "psychology", badge: "Psychology Law", desc: "The time required to rapidly move to a target area is a function of the ratio between the distance to the target and the width of the target.", takeaway: "Make critical action targets large (>= 48px) and anchor them in natural thumb reach zones." },
+      { title: "Hick's Law", cat: "psychology", badge: "Psychology Law", desc: "The time it takes to make a decision increases logarithmically with the number and complexity of choices.", takeaway: "Break multi-step forms into progressive disclosure wizards to reduce choice fatigue." },
+      { title: "Miller's Law", cat: "psychology", badge: "Psychology Law", desc: "The average person can only keep 7 (plus or minus 2) items in their working memory.", takeaway: "Chunk credit card digits, phone numbers, and list items into digestible clusters of 3-4." },
+      { title: "Jakob's Law", cat: "psychology", badge: "Psychology Law", desc: "Users spend most of their time on other sites. They expect your site to work the same way as all the other sites they already know.", takeaway: "Never reinvent universal UI patterns like search bars, cart icons, or profile drawers." },
+      { title: "Aesthetic-Usability Effect", cat: "psychology", badge: "Psychology Law", desc: "Users often perceive aesthetically pleasing design as design that is more usable, forgiving minor friction points.", takeaway: "Polish typography, micro-interactions, and visual harmony to build immediate user trust." }
+    ];
+
+    const container = document.getElementById('journal-cards-container');
+    const searchInput = document.getElementById('journal-search');
+    const tabBtns = document.querySelectorAll('.journal-tab-btn');
+    let currentCategory = 'all';
+
+    function renderCards(filterText = '') {
+      container.innerHTML = '';
+      const text = filterText.toLowerCase().trim();
+      const filtered = JOURNAL_DATA.filter(item => {
+        const matchesCat = currentCategory === 'all' || item.cat === currentCategory;
+        const matchesText = !text || item.title.toLowerCase().includes(text) || item.desc.toLowerCase().includes(text) || item.takeaway.toLowerCase().includes(text);
+        return matchesCat && matchesText;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="col-span-full py-16 text-center text-zinc-400">No matching guidelines found. Try another search term.</div>`;
+        return;
+      }
+
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        card.className = "p-5 rounded-2xl bg-[#10141E] border border-amber-500/20 hover:border-amber-400/50 transition-all flex flex-col justify-between space-y-3 group shadow-xs";
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 font-bold">${item.badge}</span>
+            </div>
+            <h3 class="text-base font-extrabold text-white group-hover:text-amber-300 transition-colors mb-1.5">${item.title}</h3>
+            <p class="text-xs text-zinc-300 leading-relaxed font-normal">${item.desc}</p>
+          </div>
+          <div class="p-3 rounded-xl bg-[#090C12] border border-white/5 space-y-1">
+            <span class="text-[9px] font-mono uppercase tracking-wider text-emerald-400 font-bold block">UX Takeaway</span>
+            <p class="text-[11px] text-zinc-400 leading-relaxed">${item.takeaway}</p>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        window.soundFx.playClick();
+        tabBtns.forEach(b => {
+          b.classList.remove('bg-amber-500', 'text-stone-950', 'font-bold');
+          b.classList.add('bg-[#121620]', 'text-zinc-300');
+        });
+        btn.classList.add('bg-amber-500', 'text-stone-950', 'font-bold');
+        btn.classList.remove('bg-[#121620]', 'text-zinc-300');
+        currentCategory = btn.dataset.cat;
+        renderCards(searchInput.value);
+      });
+    });
+
+    searchInput.addEventListener('input', (e) => {
+      renderCards(e.target.value);
+    });
+
+    renderCards();
+  </script>
+</body>
+</html>
