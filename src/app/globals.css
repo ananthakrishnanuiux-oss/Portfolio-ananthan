@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Kerala Heritage Night & Kasavu Gold Palette */
+    --bg-midnight: #08090C;
+    --bg-surface: #0E1116;
+    --bg-card: #13171F;
+    --bg-card-hover: #1A202C;
+    
+    /* Sacred Kasavu Gold & Warm Amber */
+    --gold-kasavu: #D4AF37;
+    --gold-bright: #F59E0B;
+    --gold-sun: #EAB308;
+    --gold-glow: #FDE047;
+    --amber-deep: #78350F;
+    
+    /* Kathakali Paccha (Emerald Green) & Chembarathi Crimson */
+    --kerala-green: #10B981;
+    --kerala-emerald: #059669;
+    --kerala-paccha: #34D399;
+    --kathakali-red: #E11D48;
+    --chembarathi-crimson: #F43F5E;
+    
+    /* Backwater Mist & Terracotta Tile */
+    --terracotta: #C25E3E;
+    --backwater-blue: #0F2838;
+    
+    /* High-Contrast Typographic Hierarchy (WCAG AAA Compliant) */
+    --text-pure: #FFFFFF;
+    --text-parchment: #FBF7EE;
+    --text-sand: #E2E8F0;
+    --text-muted: #94A3B8;
+    --text-dim: #64748B;
+    
+    /* Borders & Lantern Glows */
+    --border-gold-subtle: rgba(212, 175, 55, 0.22);
+    --border-gold-bright: rgba(245, 158, 11, 0.55);
+    --glow-lantern: rgba(245, 158, 11, 0.15);
+  }
+
+  body {
+    background-color: var(--bg-midnight);
+    color: var(--text-parchment);
+    font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image: 
+      radial-gradient(ellipse at 20% 12%, rgba(212, 175, 55, 0.08) 0%, transparent 45%),
+      radial-gradient(ellipse at 80% 25%, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 85%, rgba(225, 29, 72, 0.05) 0%, transparent 60%);
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: var(--font-heading), var(--font-sans), serif;
+    letter-spacing: -0.02em;
+    color: var(--text-pure);
+  }
+}
+
+/* Kerala Luxury Dark Card Styling */
+.kerala-card {
+  background: #11151D;
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  border-radius: 1.25rem;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 20px -5px rgba(212, 175, 55, 0.06);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.kerala-card:hover {
+  border-color: rgba(245, 158, 11, 0.6);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.9), 0 0 30px -4px rgba(245, 158, 11, 0.2);
+  transform: translateY(-4px);
+}
+
+/* Kasavu Gold Seal & Badges */
+.kasavu-badge {
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #FDE047;
+  border-radius: 9999px;
+  font-weight: 600;
+}
+
+.paccha-badge {
+  background: rgba(16, 185, 129, 0.14);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34D399;
+}
+
+/* Scrollbar in Kasavu Gold & Dark Obsidian */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #08090C;
+}
+::-webkit-scrollbar-thumb {
+  background: #B45309;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D97706;
+}
+
+/* Smooth Focus Outlines for Accessibility */
+:focus-visible {
+  outline: 2px solid #F59E0B;
+  outline-offset: 3px;
+}
+
+/* Glowing Lantern Keyframes */
+@keyframes lanternGlow {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.04);
+  }
+}
+.animate-lantern-glow {
+  animation: lanternGlow 6s ease-in-out infinite;
+}
+
+/* Golden Temple Firefly / Ember Float Keyframes */
+@keyframes emberFloat {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.8);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-50vh) translateX(30px) scale(1.1);
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-105vh) translateX(-20px) scale(0.6);
+    opacity: 0;
+  }
+}
+.animate-ember {
+  animation: emberFloat 12s linear infinite;
+}
+
+/* Hanging Golden Kanikkonna Branch Sway Keyframe */
+@keyframes branchSway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-2.2deg) translateY(2px);
+  }
+}
+.animate-branch-sway {
+  transform-origin: top right;
+  animation: branchSway 6.5s ease-in-out infinite;
+}
+
+/* Dropdown / View More Card Reveal Animation */
+@keyframes dropdownCard {
+  0% {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.animate-dropdown-card {
+  animation: dropdownCard 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Delicate 3D Perspective Tilt */
+.perspective-1000 {
+  perspective: 1000px;
+}
